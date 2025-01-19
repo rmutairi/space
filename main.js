@@ -3,7 +3,7 @@ import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.118/examples/js
 import PositionAlongPathState from '../positionAlongPathTools/PositionAlongPathState.js';
 import { handleScroll, updatePosition } from '../positionAlongPathTools/PositionAlongPathMethods.js';
 import { loadCurveFromJSON } from 'https://raw.githubusercontent.com/rmutairi/space/curveTools/CurveMethods.js';
-';
+
 
 const loadingScreen = document.getElementById('loading-screen');
 const loadingBar = document.querySelector('.loading-bar');
