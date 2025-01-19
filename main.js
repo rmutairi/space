@@ -1,7 +1,7 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.118/build/three.module.js';
 import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.118/examples/jsm/loaders/GLTFLoader.js';
-import PositionAlongPathState from '../positionAlongPathTools/PositionAlongPathState.js';
-import { handleScroll, updatePosition } from '../positionAlongPathTools/PositionAlongPathMethods.js';
+import PositionAlongPathState from './positionAlongPathTools/PositionAlongPathState.js';
+import { handleScroll, updatePosition } from './positionAlongPathTools/PositionAlongPathMethods.js';
 import { loadCurveFromJSON } from './curveTools/CurveMethods.js';
 
 
