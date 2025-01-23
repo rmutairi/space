@@ -2,7 +2,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.118/build/three.mod
 import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.118/examples/jsm/loaders/GLTFLoader.js';
 import PositionAlongPathState from './positionAlongPathTools/PositionAlongPathState.js';
 import { handleScroll, updatePosition } from './positionAlongPathTools/PositionAlongPathMethods.js';
-import { loadCurveFromJSON } from './rmutairi/space/curveTools/CurveMethods.js';
+import { loadCurveFromJSON } from './curveTools/CurveMethods.js';
 
 const loadingScreen = document.getElementById('loading-screen');
 const loadingBar = document.querySelector('.loading-bar');
