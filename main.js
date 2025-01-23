@@ -1,9 +1,8 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.118/build/three.module.js';
 import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.118/examples/jsm/loaders/GLTFLoader.js';
-import PositionAlongPathState from './positionAlongPathTools/PositionAlongPathState.js';
-import { handleScroll, updatePosition } from './positionAlongPathTools/PositionAlongPathMethods.js';
-import { loadCurveFromJSON } from './curveTools/CurveMethods.js';
-
+import PositionAlongPathState from '../positionAlongPathTools/PositionAlongPathState.js';
+import { handleScroll, updatePosition } from '../positionAlongPathTools/PositionAlongPathMethods.js';
+import { loadCurveFromJSON } from '../curveTools/CurveMethods.js';
 
 const loadingScreen = document.getElementById('loading-screen');
 const loadingBar = document.querySelector('.loading-bar');
@@ -132,35 +131,77 @@ class Website3DDemo {
     const color = new THREE.Color().setHex( 0x112233 );
   }
 
-  async _CreateClickableObject() {
-    const loader = new GLTFLoader(manager);
+  //async _CreateClickableObject() {
+   // const loader = new GLTFLoader(manager);
 
     // Load click.gltf for the clickable object
-    const gltf = await new Promise((resolve, reject) =>
-      loader.load('./src/clickme.gltf', resolve, undefined, reject)
-    );
-    this._clickableObject = gltf.scene;
-    this._clickableObject.scale.set(1, 1, 1); // Adjust size if needed
-    this._clickableObject.position.set(0, 1, 0); // Adjust position if needed
-    this._scene.add(this._clickableObject);
+    //const gltf = await new Promise((resolve, reject) =>
+    //  loader.load('./src/clickme.gltf', resolve, undefined, reject)
+   // );
+   /// this._clickableObject = gltf.scene;
+   // this._clickableObject.scale.set(1, 1, 1); // Adjust size if needed
+   // this._clickableObject.position.set(0, 1, 0); // Adjust position if needed
+   // this._scene.add(this._clickableObject);
 
     // Click interaction
-    const raycaster = new THREE.Raycaster();
-    const mouse = new THREE.Vector2();
+  //  const raycaster = new THREE.Raycaster();
+   // const mouse = new THREE.Vector2();
 
-    window.addEventListener('click', (event) => {
-      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  //  window.addEventListener('click', (event) => {
+    //  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    //  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-      raycaster.setFromCamera(mouse, this._camera);
-      const intersects = raycaster.intersectObject(this._clickableObject, true); // Ensure only click.gltf is checked
+    //  raycaster.setFromCamera(mouse, this._camera);
+    //  const intersects = raycaster.intersectObject(this._clickableObject, true); // Ensure only click.gltf is checked
 
-      if (intersects.length > 0) {
+     // if (intersects.length > 0) {
         // Redirect to GitHub
-        window.location.href = 'https://github.com/rmutairi/space';
-      }
-    });
-  }
+    //    window.location.href = 'https://github.com/rmutairi/space';
+  //    }
+  //  });
+ // }
+
+ async _CreateClickableObject() {
+  const loader = new GLTFLoader(manager);
+
+  // Load click.gltf for the clickable object
+  const gltf = await new Promise((resolve, reject) =>
+    loader.load('./src/clickme.gltf', resolve, undefined, reject)
+  );
+  this._clickableObject = gltf.scene;
+  this._clickableObject.scale.set(1, 1, 1); // Adjust size if needed
+  this._clickableObject.position.set(0, 1, 0); // Adjust position if needed
+  this._scene.add(this._clickableObject);
+
+  // Click interaction
+  const raycaster = new THREE.Raycaster();
+  const mouse = new THREE.Vector2();
+
+  // Common logic for both click and touch interactions
+  const handleInteraction = (clientX, clientY) => {
+    mouse.x = (clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(clientY / window.innerHeight) * 2 + 1;
+
+    raycaster.setFromCamera(mouse, this._camera);
+    const intersects = raycaster.intersectObject(this._clickableObject, true); // Ensure only click.gltf is checked
+
+    if (intersects.length > 0) {
+      // Redirect to GitHub
+      window.location.href = 'https://github.com/rmutairi/space';
+    }
+  };
+
+  window.addEventListener('click', (event) => {
+    handleInteraction(event.clientX, event.clientY);
+  });
+
+  window.addEventListener('touchstart', (event) => {
+    // Use the first touch point for interaction
+    const touch = event.touches[0];
+    handleInteraction(touch.clientX, touch.clientY);
+  });
+}
+  
 
   _SetupTouchScroll() {
     let touchStartY = 0;
